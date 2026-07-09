@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="Logos/LogoSymbol.png">
+  <title>Booking — Skeletron Music</title>
+  <meta name="description" content="Book Skeletron Music for events, collaborations, and performances.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .booking-page {
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 0 0 120px;
+    }
+
+    .booking-header {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+      padding: 48px 24px 32px;
+      text-align: center;
+    }
+
+    .booking-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 8vw, 48px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+
+    .booking-header p {
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .booking-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 0 24px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .booking-tab {
+      padding: 14px 32px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-bottom: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .booking-tab:first-child {
+      border-radius: 12px 0 0 0;
+    }
+
+    .booking-tab:last-child {
+      border-radius: 0 12px 0 0;
+    }
+
+    .booking-tab:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .booking-tab.active {
+      color: #fff;
+      background: rgba(255,255,255,0.95);
+      color: #0a0a0a;
+    }
+
+    .booking-content {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .booking-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .booking-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-bottom: 16px;
+    }
+
+    .contact-link:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    .contact-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon.email {
+      background: linear-gradient(135deg, #ea4335, #c5221f);
+    }
+
+    .contact-icon.whatsapp {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+    }
+
+    .contact-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-info p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin: 0;
+    }
+
+    .contact-arrow {
+      margin-left: auto;
+      color: rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover .contact-arrow {
+      color: #fff;
+      transform: translateX(4px);
+    }
+
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .booking-form input,
+    .booking-form textarea,
+    .booking-form select {
+      width: 100%;
+      padding: 16px 20px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .booking-form input::placeholder,
+    .booking-form textarea::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .booking-form input:focus,
+    .booking-form textarea:focus,
+    .booking-form select:focus {
+      border-color: var(--hot);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .booking-form select {
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 18px;
+    }
+
+    .booking-form select option {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .booking-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .booking-form .btn {
+      width: 100%;
+      padding: 18px 32px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, var(--hot), var(--hot-2));
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .booking-form .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,10,99,0.35);
+    }
+
+    .booking-note {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="booking-page">
+    <header class="booking-header">
+      <h1>Get In Touch</h1>
+      <p>Let's work together</p>
+    </header>
+
+    <nav class="booking-tabs" role="tablist" aria-label="Contact options">
+      <a href="#email" class="booking-tab active" role="tab" aria-selected="true" data-tab="email">Email</a>
+      <a href="#whatsapp" class="booking-tab" role="tab" aria-selected="false" data-tab="whatsapp">WhatsApp</a>
+      <a href="#booking" class="booking-tab" role="tab" aria-selected="false" data-tab="booking">Booking</a>
+    </nav>
+
+    <div class="booking-content">
+      <!-- Email Tab -->
+      <div id="email" class="booking-panel active" role="tabpanel">
+        <a href="mailto:skeletronmusic@gmail.com" class="contact-link">
+          <div class="contact-icon email">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <h3>Email Us</h3>
+            <p>skeletronmusic@gmail.com</p>
+          </div>
+          <svg class="contact-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- WhatsApp Tab -->
+      <div id="whatsapp" class="booking-panel" role="tabpanel">
+        <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <div class="contact-icon whatsapp">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <h3>WhatsApp</h3>
+            <p>Message us directly</p>
+          </div>
+          <svg class="contact-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Booking Tab -->
+      <div id="booking" class="booking-panel" role="tabpanel">
+        <form class="booking-form" name="booking" action="#" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+          <input type="text" name="event" placeholder="Event / Occasion">
+          <input type="text" name="date" placeholder="Preferred Date" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+          <select name="service">
+            <option value="" disabled selected>Select Service</option>
+            <option value="dj">DJ Performance</option>
+            <option value="production">Music Production</option>
+            <option value="mastering">Mastering</option>
+            <option value="mentorship">Academy Mentorship</option>
+            <option value="collab">Collaboration</option>
+            <option value="other">Other</option>
+          </select>
+          <textarea name="message" placeholder="Tell us about your project..."></textarea>
+          <button type="submit" class="btn">Send Request</button>
+          <p class="booking-note">We'll get back to you within 24 hours</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Dock -->
+  <nav class="nav dock-nav liquid-dock" aria-label="Primary navigation">
+    <a class="nav-item" href="index.html" aria-label="Home"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.8 12 4l8.5 6.8v8.4a1.8 1.8 0 0 1-1.8 1.8h-4.2v-6.2h-5V21H5.3a1.8 1.8 0 0 1-1.8-1.8v-8.4Z"/></svg></span><span class="nav-label">Home</span></a><a class="nav-item" href="biography.html" aria-label="Bio"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.2a4.3 4.3 0 1 0 0-8.6 4.3 4.3 0 0 0 0 8.6Zm-7.2 8.2c.8-3.9 3.5-6.2 7.2-6.2s6.4 2.3 7.2 6.2H4.8Z"/></svg></span><span class="nav-label">Bio</span></a><a class="nav-item" href="academy.html" aria-label="Academy"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 2.8 8l9.2 4.8L21.2 8 12 3.2Zm-6.7 8.2v4.2c1.7 2.1 3.9 3.2 6.7 3.2s5-1.1 6.7-3.2v-4.2L12 14.9l-6.7-3.5Z"/></svg></span><span class="nav-label">Academy</span></a><a class="nav-item" href="music.html" aria-label="Music"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span><span class="nav-label">Music</span></a><a class="nav-item active" href="booking.html" aria-label="Booking"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span class="nav-label">Booking</span></a>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.booking-tab');
+      const panels = document.querySelectorAll('.booking-panel');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          // Remove active from all tabs
+          tabs.forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+
+          // Add active to clicked tab
+          this.classList.add('active');
+          this.setAttribute('aria-selected', 'true');
+
+          // Hide all panels
+          panels.forEach(p => p.classList.remove('active'));
+
+          // Show corresponding panel
+          const target = this.getAttribute('href').substring(1);
+          document.getElementById(target).classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
