@@ -302,6 +302,22 @@ textarea { padding: 16px; min-height: 132px; resize: vertical; }
   line-height: 1;
   text-shadow: 0 4px 50px rgba(0,0,0,0.5);
 }
+.academy-hero .hero-title,
+.music-hero .hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 2vw, 28px);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.95);
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.academy-hero .hero-inner,
+.music-hero .hero-inner {
+  justify-content: center;
+}
 .bio-body { columns: 2 360px; column-gap: 54px; color: rgba(245,240,232,.76); line-height: 1.85; }
 .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .gallery img { width: 100%; height: 330px; object-fit: cover; border: 1px solid var(--line); filter: grayscale(.15); }
@@ -2080,5 +2096,347 @@ body > nav.liquid-dock .nav-item {
   .gallery-carousel {
     aspect-ratio: 1 / 1;
     border-radius: 8px;
+  }
+}
+
+
+/* ============================================
+   STUDENT STORIES SECTION — Academy Page
+   ============================================ */
+
+.student-stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.student-story {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+}
+
+.story-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.story-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.student-story:hover .story-img-wrap img {
+  transform: scale(1.04);
+}
+
+.story-logo {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 52px;
+  height: 52px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.story-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.story-text {
+  padding: 22px 24px 26px;
+}
+
+.story-text p {
+  color: rgba(245, 240, 232, 0.72);
+  font-size: 14px;
+  line-height: 1.78;
+  margin: 0;
+}
+
+/* Reveal animation for scroll */
+.student-story.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.student-story.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays for each card */
+.student-stories-grid .student-story:nth-child(1).reveal {
+  transition-delay: 0ms;
+}
+.student-stories-grid .student-story:nth-child(2).reveal {
+  transition-delay: 100ms;
+}
+.student-stories-grid .student-story:nth-child(3).reveal {
+  transition-delay: 200ms;
+}
+
+@media (max-width: 960px) {
+  .student-stories-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .story-img-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .story-img-wrap img {
+    object-position: center;
+  }
+
+  .story-text {
+    padding: 18px 20px 22px;
+  }
+
+  .student-story.reveal {
+    transform: translateY(24px);
+  }
+
+  .student-stories-grid .student-story:nth-child(1).reveal { transition-delay: 0ms; }
+  .student-stories-grid .student-story:nth-child(2).reveal { transition-delay: 80ms; }
+  .student-stories-grid .student-story:nth-child(3).reveal { transition-delay: 160ms; }
+}
+
+@media (max-width: 520px) {
+  .story-img-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .story-img-wrap img {
+    object-position: center;
+  }
+
+  .story-logo {
+    width: 44px;
+    height: 44px;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .story-text {
+    padding: 16px 18px 20px;
+  }
+
+  .story-text p {
+    font-size: 13px;
+  }
+}
+
+/* Academy & Music hero responsive (matching bio hero) */
+@media (max-width: 850px) {
+  .academy-hero .hero-title,
+  .music-hero .hero-title {
+    font-size: clamp(14px, 3vw, 22px);
+    letter-spacing: 0.4em;
+  }
+}
+
+@media (max-width: 520px) {
+  .academy-hero .hero-title,
+  .music-hero .hero-title {
+    font-size: 14px;
+    letter-spacing: 0.35em;
+  }
+}
+
+/* Final responsive pass: academy stories + fixed dock */
+body > .liquid-dock,
+body > .dock-nav.liquid-dock,
+body > nav.liquid-dock {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  align-items: center !important;
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  transform: translate3d(-50%, 0, 0) !important;
+  overflow: hidden !important;
+}
+
+body > .liquid-dock .nav-item,
+body > .dock-nav.liquid-dock .nav-item,
+body > nav.liquid-dock .nav-item {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+body > .liquid-dock .nav-label,
+body > .dock-nav.liquid-dock .nav-label,
+body > nav.liquid-dock .nav-label {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+@media (min-width: 851px) {
+  body {
+    padding-bottom: 118px !important;
+  }
+
+  body > .liquid-dock,
+  body > .dock-nav.liquid-dock,
+  body > nav.liquid-dock {
+    width: min(88vw, 620px) !important;
+    height: 54px !important;
+    min-height: 54px !important;
+    bottom: max(18px, env(safe-area-inset-bottom)) !important;
+    padding: 6px !important;
+    gap: 4px !important;
+    border-radius: 999px !important;
+  }
+
+  body > .liquid-dock .nav-item,
+  body > .dock-nav.liquid-dock .nav-item,
+  body > nav.liquid-dock .nav-item {
+    min-height: 42px !important;
+    padding: 0 10px !important;
+    gap: 7px !important;
+  }
+}
+
+@media (max-width: 850px) {
+  body {
+    padding-bottom: calc(112px + env(safe-area-inset-bottom)) !important;
+  }
+
+  body > .liquid-dock,
+  body > .dock-nav.liquid-dock,
+  body > nav.liquid-dock {
+    width: min(calc(100vw - 22px), 520px) !important;
+    height: 52px !important;
+    min-height: 52px !important;
+    bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+    padding: 5px !important;
+    gap: 3px !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 999px !important;
+    background: rgba(8,8,8,.78) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 18px 48px rgba(0,0,0,.36) !important;
+    backdrop-filter: blur(20px) saturate(1.2) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+  }
+
+  body > .liquid-dock .nav-item,
+  body > .dock-nav.liquid-dock .nav-item,
+  body > nav.liquid-dock .nav-item {
+    min-height: 42px !important;
+    padding: 0 4px !important;
+    gap: 4px !important;
+    border-radius: 999px !important;
+  }
+
+  body > .liquid-dock .nav-icon,
+  body > .dock-nav.liquid-dock .nav-icon,
+  body > nav.liquid-dock .nav-icon,
+  body > .liquid-dock .nav-icon svg,
+  body > .dock-nav.liquid-dock .nav-icon svg,
+  body > nav.liquid-dock .nav-icon svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  body > .liquid-dock .nav-label,
+  body > .dock-nav.liquid-dock .nav-label,
+  body > nav.liquid-dock .nav-label {
+    font-size: clamp(7px, 1.8vw, 9px) !important;
+    letter-spacing: 0 !important;
+  }
+
+  #student-stories.section {
+    padding-bottom: calc(140px + env(safe-area-inset-bottom));
+  }
+
+  .student-stories-grid {
+    width: min(100%, 680px);
+    max-width: none;
+    gap: 28px;
+  }
+
+  .student-story {
+    background: rgba(255,255,255,.035);
+  }
+
+  .story-img-wrap {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+
+  .story-img-wrap img {
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+    transform: none !important;
+  }
+
+  .story-text {
+    padding: clamp(18px, 4vw, 28px);
+  }
+
+  .story-text p {
+    font-size: clamp(14px, 3.1vw, 18px);
+    line-height: 1.8;
+  }
+}
+
+@media (max-width: 430px) {
+  body > .liquid-dock,
+  body > .dock-nav.liquid-dock,
+  body > nav.liquid-dock {
+    width: min(calc(100vw - 14px), 420px) !important;
+    height: 50px !important;
+    min-height: 50px !important;
+    bottom: calc(6px + env(safe-area-inset-bottom)) !important;
+    padding: 5px !important;
+    gap: 2px !important;
+  }
+
+  body > .liquid-dock .nav-item,
+  body > .dock-nav.liquid-dock .nav-item,
+  body > nav.liquid-dock .nav-item {
+    min-height: 40px !important;
+    padding-inline: 2px !important;
+    gap: 3px !important;
+  }
+
+  body > .liquid-dock .nav-label,
+  body > .dock-nav.liquid-dock .nav-label,
+  body > nav.liquid-dock .nav-label {
+    font-size: clamp(6.5px, 1.9vw, 8px) !important;
+  }
+
+  .student-stories-grid {
+    gap: 22px;
+  }
+
+  .story-text p {
+    font-size: 14px;
+    line-height: 1.72;
   }
 }
