@@ -285,7 +285,6 @@ textarea { padding: 16px; min-height: 132px; resize: vertical; }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; }
 .footer-links a { color: inherit; font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; transition: color .25s var(--ease); }
 .footer-links a:hover { color: var(--hot); }
-.nav-item[href="videos.html"] { display: none !important; }
 .legal-main { padding: clamp(120px, 15vw, 180px) 0 clamp(60px, 8vw, 100px); }
 .legal-content { max-width: 720px; }
 .legal-content h2 { font-family: var(--font-display); font-size: clamp(18px, 2vw, 24px); font-weight: 700; color: #fff; margin: 48px 0 16px; letter-spacing: 0.02em; text-transform: uppercase; }
@@ -2577,9 +2576,3 @@ body > nav.liquid-dock .nav-label {
   }
 }
 
-/* The main dock uses five primary destinations; Videos is available only from its direct page URL. */
-body > .liquid-dock .nav-item[href="videos.html"],
-body > .dock-nav.liquid-dock .nav-item[href="videos.html"],
-body > nav.liquid-dock .nav-item[href="videos.html"] {
-  display: none !important;
-}
