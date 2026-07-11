@@ -112,6 +112,9 @@ button, input, textarea { font: inherit; }
   text-align: center;
   padding-bottom: 12vh;
   gap: 16px;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto;
 }
 .hero-title {
   font-family: var(--font-display);
@@ -279,6 +282,18 @@ input, textarea { width: 100%; background: rgba(255,255,255,.06); border: 1px so
 textarea { padding: 16px; min-height: 132px; resize: vertical; }
 .footer { padding: 38px clamp(20px, 4vw, 54px); color: rgba(245,240,232,.56); }
 .footer-inner { width: min(var(--max), 100%); margin: auto; display: flex; justify-content: space-between; gap: 22px; border-top: 1px solid var(--line); padding-top: 28px; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; }
+.footer-links a { color: inherit; font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; transition: color .25s var(--ease); }
+.footer-links a:hover { color: var(--hot); }
+.nav-item[href="videos.html"] { display: none !important; }
+.legal-main { padding: clamp(120px, 15vw, 180px) 0 clamp(60px, 8vw, 100px); }
+.legal-content { max-width: 720px; }
+.legal-content h2 { font-family: var(--font-display); font-size: clamp(18px, 2vw, 24px); font-weight: 700; color: #fff; margin: 48px 0 16px; letter-spacing: 0.02em; text-transform: uppercase; }
+.legal-content p { color: rgba(245,240,232,.7); font-size: 16px; line-height: 1.8; margin: 0 0 16px; }
+.legal-content ul { color: rgba(245,240,232,.7); font-size: 16px; line-height: 1.8; margin: 0 0 16px; padding-left: 24px; }
+.legal-content li { margin-bottom: 8px; }
+.legal-content a { color: var(--hot); text-decoration: none; }
+.legal-content a:hover { text-decoration: underline; }
 .page-hero { min-height: 74svh; }
 .page-hero .hero-inner {
   position: relative;
@@ -398,7 +413,8 @@ textarea { padding: 16px; min-height: 132px; resize: vertical; }
   gap: 14px;
 }
 .academy-hero .hero-media img {
-  object-position: 50% 18%;
+  object-fit: cover;
+  object-position: center 30%;
 }
 .course-wrap {
   display: grid;
@@ -1189,6 +1205,13 @@ textarea {
   }
   .card {
     min-height: 320px;
+  }
+  .card img {
+    opacity: .5;
+    object-position: top center;
+  }
+  .card::after {
+    background: linear-gradient(0deg, rgba(0,0,0,.92), transparent 50%);
   }
   .image-stack {
     min-height: 390px;
@@ -2248,6 +2271,119 @@ body > nav.liquid-dock .nav-item {
   }
 }
 
+/* Academy Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-hidden {
+  display: none;
+}
+
+.gallery-toggle-wrap {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.gallery-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(245, 240, 232, 0.4);
+  color: var(--ink);
+  padding: 12px 32px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 999px;
+}
+
+.gallery-toggle-btn:hover {
+  border-color: var(--ink);
+  background: rgba(245, 240, 232, 0.05);
+}
+
+.gallery-toggle-btn:active {
+  background: rgba(245, 240, 232, 0.08);
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Student Stories Carousel */
+.student-carousel {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.student-carousel-track {
+  position: relative;
+  overflow: hidden;
+}
+
+.student-carousel-track .student-story {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.student-carousel-track .student-story.active {
+  display: block;
+  opacity: 1;
+}
+
+.student-carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(245, 240, 232, 0.4);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot:hover {
+  border-color: var(--ink);
+}
+
+.carousel-dot.active {
+  background: var(--hot);
+  border-color: var(--hot);
+}
+
 /* Academy & Music hero responsive (matching bio hero) */
 @media (max-width: 850px) {
   .academy-hero .hero-title,
@@ -2439,4 +2575,11 @@ body > nav.liquid-dock .nav-label {
     font-size: 14px;
     line-height: 1.72;
   }
+}
+
+/* The main dock uses five primary destinations; Videos is available only from its direct page URL. */
+body > .liquid-dock .nav-item[href="videos.html"],
+body > .dock-nav.liquid-dock .nav-item[href="videos.html"],
+body > nav.liquid-dock .nav-item[href="videos.html"] {
+  display: none !important;
 }

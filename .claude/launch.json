@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "booking-page",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "start", "booking.html"],
+      "port": 0
+    }
+  ]
+}
