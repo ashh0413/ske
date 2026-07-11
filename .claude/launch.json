@@ -4,7 +4,7 @@
     {
       "name": "booking-page",
       "runtimeExecutable": "cmd",
-      "runtimeArgs": ["/c", "start", "booking/"],
+      "runtimeArgs": ["/c", "start", "booking.html"],
       "port": 0
     }
   ]
