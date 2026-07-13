@@ -35,7 +35,7 @@
         <div class="eyebrow">About</div>
         <h2>Who Is<br>Skeletron</h2>
         <p>Skeletron is a DJ, producer, performer and music mentor shaping a bold electronic sound from Goa, India. His world blends Bollywood remix energy, club-ready production, and a polished visual identity made for modern stages.</p>
-        <p>From acclaimed remixes to academy-led training, Skeletron connects performance and education — helping listeners feel the drop and helping creators understand how it was built.</p>
+        <p>From acclaimed remixes to academy-led training, Skeletron connects performance and education  helping listeners feel the drop and helping creators understand how it was built.</p>
         <a class="btn" href="/bio/">Find Out More</a>
       </div>
     </div>
@@ -64,21 +64,21 @@
   <section class="section newsletter">
     <div class="container grid-2 reveal">
       <div><div class="eyebrow">Newsletter</div><h2>Never Miss<br>A Drop</h2><p class="lead">Get release alerts, academy updates, new mixes and upcoming show announcements.</p></div>
-      <form class="form" id="subscribe-form"><input name="name" aria-label="Name" placeholder="Name*" required><input name="email" type="email" aria-label="Email" placeholder="Email*" required><button class="btn hot" type="submit">Subscribe</button></form>
+      <form class="form" id="subscribe-form" onsubmit="return false;"><input name="name" aria-label="Name" placeholder="Name*" required><input name="email" type="email" aria-label="Email" placeholder="Email*" required><a id="subscribe-btn" class="btn hot" href="mailto:skeletronmusic7@gmail.com?subject=Newsletter%20Subscription" onclick="fillSubscribeMail()">Subscribe</a></form>
     </div>
   </section>
 </main>
 <footer class="footer"><div class="footer-inner"><span>© 2026 SKELETRON MUSIC</span><div class="footer-links"><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms &amp; Conditions</a></div><span class="site-credit">Website by <a href="https://wa.me/917249399711" target="_blank" rel="noopener">Aston Rodriguez</a></span></div></footer>
 <script src="assets/js/main.js"></script>
 <script>
-  document.getElementById('subscribe-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var name = this.querySelector('[name="name"]').value;
-    var email = this.querySelector('[name="email"]').value;
-    var subject = encodeURIComponent('Newsletter Subscription');
-    var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nI would like to subscribe to the Skeletron Music newsletter.');
-    window.location.href = 'mailto:skeletronmusic7@gmail.com?subject=' + subject + '&body=' + body;
-  });
+  function fillSubscribeMail() {
+    var form = document.getElementById('subscribe-form');
+    var name = form.querySelector('[name="name"]').value;
+    var email = form.querySelector('[name="email"]').value;
+    var body = 'Name: ' + name + '\nEmail: ' + email + '\n\nI would like to subscribe to the Skeletron Music newsletter.';
+    var link = document.getElementById('subscribe-btn');
+    link.href = 'mailto:skeletronmusic7@gmail.com?subject=Newsletter%20Subscription&body=' + encodeURIComponent(body);
+  }
 </script>
 </body>
 </html>
